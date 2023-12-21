@@ -1,4 +1,4 @@
-name: Install dependencies, building and testing
+name: Deployment pipeline
 
 on:
   push:
