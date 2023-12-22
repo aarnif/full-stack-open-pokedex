@@ -34,7 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   deploy:
-    needs: [build_and_test]
+    needs: [install_dependencies_and_check_styles]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
