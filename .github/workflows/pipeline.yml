@@ -32,7 +32,7 @@ jobs:
         run: npm run build
       - name: Build failed
         if: ${{ failure() }}
-        run: echo "build failure!"
+        run: echo "Build failure!"
       - name: Run tests
         run: npm run test
       - name: e2e tests
