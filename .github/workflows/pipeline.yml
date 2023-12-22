@@ -20,14 +20,6 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-  build_and_test:
-    needs: [install_dependencies_and_check_styles]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
       - name: Make build
         run: npm run build
       - name: Build failed
