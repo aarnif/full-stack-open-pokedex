@@ -28,7 +28,7 @@ jobs:
         with:
             severity: error
             username: GitHub.
-            description: commit ${{ github.event.commits.url }} by ${{ github.event.commits.author.username }} broke the code
+            description: commit ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].author.username }} broke the code
             text: Build failed
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Run tests
@@ -56,7 +56,7 @@ jobs:
         with:
             severity: info
             username: GitHub.
-            description: https://pokedex-z5v4.onrender.com/
+            description: https://pokedex-z5v4.onrender.com/ by ${{ github.event.commits[0].author.username }}
             text: A new version of pokedex deployed
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
