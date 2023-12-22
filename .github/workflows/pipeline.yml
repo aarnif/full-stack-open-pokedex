@@ -24,7 +24,13 @@ jobs:
         run: npm run build
       - name: Build failed
         if: ${{ failure() }}
-        run: echo "Build failure!"
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: error
+            username: GitHub.
+            description: commit ${{ github.event.commits.url }} by ${{ github.event.commits.author.username }} broke the code
+            text: Build failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Run tests
         run: npm run test
       - name: e2e tests
@@ -46,7 +52,13 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Deployment has succeeded
         if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ', '), '#skip') == false && success() }}
-        run: echo "Deploy success!"
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: info
+            username: GitHub.
+            description: https://pokedex-z5v4.onrender.com/
+            text: A new version of pokedex deployed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [deploy]
     runs-on: ubuntu-20.04
